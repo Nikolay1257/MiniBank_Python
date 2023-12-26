@@ -45,7 +45,7 @@ while True:
     elif enter == '3':
         c = int(input("введите сумму для снятия: "))
         if (c < 20001) and (c > 0) and (bank[number]['balance'] > 0):
-            bank[number]['balance'] = bank['balance'] - int(c)
+            bank[number]['balance'] = bank[number]['balance'] - int(c)
             print("с вашего счета снято " + str(c) + "$")
         else:
             print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк")
@@ -54,4 +54,4 @@ while True:
         break
 
     else:
-        print("извините такого пункта нет в меню выберете другой")
+        print("извините такого пункта нет в меню выберете другой\n")
