@@ -143,6 +143,7 @@ if number == 0000:
         print("3 - снять средства пользователя")
         print("4 - перевод средств между пользователями")
         print("5 - показатьвсех пользователей в системе и их баланс")
+        print("6 - завершить работу")
 
         c = ("выберите что хотите сделать:\n")
         enter = input(c)
@@ -190,39 +191,45 @@ if number == 0000:
                   card3()   
 
         elif enter == '5':
-             for x in int(bank[0000]['balance']):
-                  print(x)         
-while True:
-    print("1 - мой счет")
-    print("2 - пополнить счет")
-    print("3 - снять со счета")
-    print("4 - завершить работу")
+             balance = "баланс пользователей:\n" + str(bank[0000]['balance']) + "$ - у пользователя 0000\n" + str(bank[1111]['balance']) + "$ - у пользователя 1111\n" + str(bank[2222]['balance']) + "$ - у пользователя 2222"
+             print(balance)
 
-    v = ("\nвыберите что хотите сделать:\n")
-    enter = input(v)
-
-    if enter == '1':
-    
-        print("на вашем счету " + str(bank[number]['balance']) + "$")
-    
-    elif enter == '2':
-        o = int(input("введите сумму для пополнения:\n"))
-        if (o < 20001) and (o > 0):
-            bank[number]['balance'] = bank[number]['balance'] + int(o)
-            print("Ваш счет пополнен на: " + str(o) + "$" + "\n")
+        elif enter == '6':
+             break
         else:
-            print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+             print("извените такого пункта нету в меню")
 
-    elif enter == '3':
-        c = int(input("введите сумму для снятия:\n"))
-        if (c < 20001) and (c > 0) and (bank[number]['balance'] > 0):
-            bank[number]['balance'] = bank[number]['balance'] - int(c)
-            print("с вашего счета снято " + str(c) + "$")
-        else:
-            print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-    
-    elif enter == '4':
-        break
+else:
+     while True:
+          print("1 - мой счет")
+          print("2 - пополнить счет")
+          print("3 - снять со счета")
+          print("4 - завершить работу")
 
-    else:
-        print("извините такого пункта нет в меню выберете другой\n")
+          v = ("\nвыберите что хотите сделать:\n")
+          enter = input(v)
+
+          if enter == '1':
+               print("на вашем счету " + str(bank[number]['balance']) + "$")
+
+          elif enter == '2':
+               o = int(input("введите сумму для пополнения:\n"))
+               if (o < 20001) and (o > 0):
+                    bank[number]['balance'] = bank[number]['balance'] + int(o)
+                    print("Ваш счет пополнен на: " + str(o) + "$" + "\n")
+               else:
+                    print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+
+          elif enter == '3':
+               c = int(input("введите сумму для снятия:\n"))
+               if (c < 20001) and (c > 0) and (bank[number]['balance'] > 0):
+                    bank[number]['balance'] = bank[number]['balance'] - int(c)
+                    print("с вашего счета снято " + str(c) + "$")
+               else:
+                    print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+
+          elif enter == '4':
+               break
+          
+          else:
+               print("извините такого пункта нет в меню выберете другой\n")
