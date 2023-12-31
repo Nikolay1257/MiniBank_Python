@@ -27,65 +27,73 @@ while bank[number]["pin"] != pin:
 
 print("\nДобро пожаловать в админ панель" + "\n")
 
-def user1():
-    print("у пользователя " + str(bank[1111]['balance']) + "$")
-
-def user2():
-    print("у данного пользователя " + str(bank[2222]['balance']) + "$")
-
-
-def shop():
-    o = int(input("введите сумму для пополнения\n"))
-    if (o < 20001) and (o > 0):
-            bank[0000]['balance'] = bank[0000]['balance'] + int(o)
-            print("Ваш счет пополнен на: " + str(o) + "$" + "\n")
+def user(USER):
+    if o == 0000:
+         print("у данного пользователя " + str(bank[0000]['balance']) + "$")
+    elif o == 1111:
+         print("у пользователя " + str(bank[1111]['balance']) + "$")
+    elif o == 2222:
+         print("у пользователя " + str(bank[2222]['balance']) + "$")
     else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+         print("Данного пользователя нету в бд")
 
-def shop1():
-    a = int(input("введите сумму для пполнения\n"))
-    if (a < 20001) and (a > 0):          
+
+def shop(USER):
+    if o == 0000:
+         a = int(input("введите сумму для пополнения\n"))
+         if (a < 20001) and (a > 0):
+            bank[0000]['balance'] = bank[0000]['balance'] + int(a)
+            print("Ваш счет пополнен на: " + str(a) + "$" + "\n")
+         else:
+              print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+    elif o == 1111:
+         a = int(input("введите сумму для пполнения\n"))
+         if (a < 20001) and (a > 0):
             bank[1111]['balance'] = bank[1111]['balance'] + int(a)
             print("Ваш счет пополнен на: " + str(a) + "$" + "\n")
-    else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-
-def shop3():
-    a = int(input("введите сумму для пполнения\n"))
-    if (a < 20001) and (a > 0):          
+         else:
+              print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+    elif o == 2222:
+         a = int(input("введите сумму для пполнения\n"))
+         if (a < 20001) and (a > 0):         
             bank[2222]['balance'] = bank[2222]['balance'] + int(a)
             print("Ваш счет пополнен на: " + str(a) + "$" + "\n")
+         else:
+              print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
     else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+         print("Данного пользователя нету в бд")
 
 
-def takeoff():
-    c = int(input("введите сумму для снятия:\n"))
-    if (c < 20001) and (c > 0) and (bank[0000]['balance'] > 0):
+def takeoff(USER):
+    if o == 0000:
+         c = int(input("введите сумму для снятия:\n"))
+         if (c <= (bank[0000]['balance'])) and (c > 0) and (bank[0000]['balance'] > 0):
             bank[0000]['balance'] = bank[0000]['balance'] - int(c)
             print("с вашего счета снято " + str(c) + "$")
-    else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-
-def takeoff1():
-    c = int(input("введите сумму для снятия:\n"))
-    if (c < 20001) and (c > 0) and (bank[1111]['balance'] > 0):
+         else:
+              print("на счету не достаточно средств для снятия\n")
+    elif o == 1111:
+         c = int(input("введите сумму для снятия:\n"))
+         if (c <= (bank[1111]['balance'])) and (c > 0) and (bank[1111]['balance'] > 0):
             bank[1111]['balance'] = bank[1111]['balance'] - int(c)
             print("с вашего счета снято " + str(c) + "$")
-    else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-
-def takeoff2():
-    c = int(input("введите сумму для снятия:\n"))
-    if (c < 20001) and (c > 0) and (bank[2222]['balance'] > 0):
+         else:
+              print("на счету не достаточно средств для снятия\n")
+    elif o == 2222:
+         c = int(input("введите сумму для снятия:\n"))
+         if (c <= (bank[2222]['balance'])) and (c > 0) and (bank[2222]['balance'] > 0):
             bank[2222]['balance'] = bank[2222]['balance'] - int(c)
             print("с вашего счета снято " + str(c) + "$")
+         else:
+              print("на счету не доостаточно средств для снятия\n")
     else:
-        print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+         print("данного пользоваткля нету в бд")
+          
 
-def card():
-     v = int(input("введите сумму для перевода:\n"))
-     if (v < 20001) and (v > 0) and (bank[0000]['balance'] > 0):
+def card(USER):
+     if o == 0000:
+          v = int(input("введите сумму для перевода:\n"))
+          if (v < 20001) and (v > 0) and (bank[0000]['balance'] > 0):
             bank[0000]['balance'] = bank[0000]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
             k = int(input("введите пользователя котрому хотите перевести:\n"))
@@ -100,10 +108,9 @@ def card():
                  print("деньги возврвщены на счет пользователю " + "0000 " + "\n")
             else:
                  print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-
-def card1():
-     v = int(input("введите сумму для перевода:\n"))
-     if (v < 20001) and (v > 0) and (bank[1111]['balance'] > 0):
+     elif o == 1111:
+          v = int(input("введите сумму для перевода:\n"))
+          if (v < 20001) and (v > 0) and (bank[1111]['balance'] > 0):
             bank[1111]['balance'] = bank[1111]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
             k = int(input("введите пользователя котрому хотите перевести:\n"))
@@ -117,10 +124,9 @@ def card1():
                  bank[2222]['balance'] = bank[2222]['balance'] + (v)
             else:
                  print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
-
-def card3():
-     v = int(input("введите сумму для перевода:\n"))
-     if (v < 20001) and (v > 0) and (bank[2222]['balance'] > 0):
+     elif o == 2222:
+          v = int(input("введите сумму для перевода:\n"))
+          if (v < 20001) and (v > 0) and (bank[2222]['balance'] > 0):
             bank[2222]['balance'] = bank[2222]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
             k = int(input("введите пользователя котрому хотите перевести:\n"))
@@ -129,11 +135,16 @@ def card3():
                  print("переведено " + str(v) + "пользователю " + "0000" + "\n")
             elif k == 1111:
                  bank[1111]['balance'] = bank[1111]['balance'] + (v)
+                 print("переведено " + str(v) + "пользователю " + "1111" + "\n")
             elif k == 2222:
                  bank[2222]['balance'] = bank[2222]['balance'] + int(v)
-                 print("деньги возврвщены на счет пользователю " + "1111" + "\n")
+                 print("деньги возврвщены на счет пользователю " + "2222" + "\n")
+                 
+                 bank[2222]['balance'] = bank[2222]['balance'] + (v)
             else:
                  print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+     else:
+          print("данного пользоваткля нету в бд")
 
 
 if number == 0000:
@@ -150,45 +161,19 @@ if number == 0000:
 
         if enter == '1':
             o = int(input("введите счет:\n"))
-            if o == 0000:
-                print("у данного пользователя " + str(bank[number]['balance']) + "$")
-            elif o == 1111:
-                user1()
-            elif o == 2222:
-                user2()
-            else:
-                print("данного пользователя нету в бд")
+            user(o)
 
         elif enter == '2':
             o = int(input("Выберите пользователя:\n"))
-            if o == 0000:
-                shop()
-            elif o == 1111:
-                shop1()
-            elif o == 2222:
-                shop3()
-            else:
-                print("Данного пользователя нету в бд")
+            result = shop(o)
 
         elif enter == '3':
             o = int(input("выберите пользователя:\n"))
-            if o == 0000:
-                takeoff()
-            elif o == 1111:
-                takeoff1()
-            elif o == 2222:
-                 takeoff2()
-            else:
-                 print("данного пользоваткля нету в бд")
+            takeoff(o)
 
         elif enter == '4':
              o = int(input("введите пользователя у которого хотите пееревести деньги\n"))
-             if o == 0000:
-                  card()
-             elif o == 1111:
-                  card1()
-             elif o == 2222:
-                  card3()   
+             card(o)
 
         elif enter == '5':
              balance = "баланс пользователей:\n" + str(bank[0000]['balance']) + "$ - у пользователя 0000\n" + str(bank[1111]['balance']) + "$ - у пользователя 1111\n" + str(bank[2222]['balance']) + "$ - у пользователя 2222"
