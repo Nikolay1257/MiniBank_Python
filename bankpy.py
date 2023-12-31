@@ -207,11 +207,11 @@ else:
 
           elif enter == '3':
                c = int(input("введите сумму для снятия:\n"))
-               if (c < 20001) and (c > 0) and (bank[number]['balance'] > 0):
+               if (c <= (bank[number]['balance'])) and (c > 0) and (bank[number]['balance'] > 0):
                     bank[number]['balance'] = bank[number]['balance'] - int(c)
                     print("с вашего счета снято " + str(c) + "$")
                else:
-                    print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+                    print("недостаточно средств\n")
 
           elif enter == '4':
                break
