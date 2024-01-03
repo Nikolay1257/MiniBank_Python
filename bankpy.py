@@ -15,10 +15,20 @@ bank = {
 
 print("Добро пожаловать в банк\n")
 
-number = int(input("введите свой номер карты:\n"))
-while (not bank.get(number)):
-    print('нету такой карты. Попробуйте ещё раз')
-    number = int(input("введите свой номер карты:\n"))
+def check_number(number_string, bank):
+    try:
+        number = int(number_string)
+        return bank.get(number)
+    except ValueError:
+        return False
+
+
+number_string = input("введите свой номер карты:\n")
+while (not check_number(number_string, bank)):
+    print('Неверный ввод. Попробуйте ещё раз')
+    number_string = input("Введите свой номер карты:\n")
+number = int(number_string)
+
 
 pin = int(input("введите свий PIN:\n"))
 while bank[number]["pin"] != pin:
