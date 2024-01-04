@@ -15,26 +15,31 @@ bank = {
 
 print("Добро пожаловать в банк\n")
 
-def check_number(number_string, bank):
-    try:
-        number = int(number_string)
-        return bank.get(number)
-    except ValueError:
-        return False
+def check_number(number_string):
+     if not number_string.isdigit():
+          return False
+     else:
+          return bank.get(int(number_string))
+     
+def check_pin(pin_string, number):
+     if not pin_string.isdigit():
+          return False
+     else:
+          return bank[number]['pin'] == int(pin_string)
 
 
-number_string = input("введите свой номер карты:\n")
-while (not check_number(number_string, bank)):
+number = input("введите свой номер карты:\n")
+while (not check_number(number)):
     print('Неверный ввод. Попробуйте ещё раз')
-    number_string = input("Введите свой номер карты:\n")
-number = int(number_string)
+    number = input("введите свой номер карты:\n")
 
-
-pin = int(input("введите свий PIN:\n"))
-while bank[number]["pin"] != pin:
+number = int(number)
+pin = input("введите свий PIN:\n")
+while not check_pin(pin, number):
     print("неверный PIN. Попробуйте ещё раз")
-    pin = int(input("введите свий PIN:\n"))
+    pin = input("введите свий PIN:\n")
 
+pin = int(pin)
 print("\nДобро пожаловать в админ панель" + "\n")
 
 def user(USER):
@@ -106,7 +111,7 @@ def card(USER):
           if (v < 20001) and (v > 0) and (bank[0000]['balance'] > 0):
             bank[0000]['balance'] = bank[0000]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
-            k = int(input("введите пользователя котрому хотите перевести:\n"))
+            k = int(input("введите пользователя которому хотите перевести:\n"))
             if k == 1111:
                  bank[1111]['balance'] = bank[1111]['balance'] + (v)
                  print("переведено " + str(v) + " пользователю " + "1111" + "\n")
@@ -123,7 +128,7 @@ def card(USER):
           if (v < 20001) and (v > 0) and (bank[1111]['balance'] > 0):
             bank[1111]['balance'] = bank[1111]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
-            k = int(input("введите пользователя котрому хотите перевести:\n"))
+            k = int(input("введите пользователя которому хотите перевести:\n"))
             if k == 0000:
                  bank[0000]['balance'] = bank[0000]['balance'] + (v)
                  print("переведено " + str(v) + "пользователю " + "0000" + "\n")
@@ -139,7 +144,7 @@ def card(USER):
           if (v < 20001) and (v > 0) and (bank[2222]['balance'] > 0):
             bank[2222]['balance'] = bank[2222]['balance'] - int(v)
             print("с вашего счета снято " + str(v) + "$")
-            k = int(input("введите пользователя котрому хотите перевести:\n"))
+            k = int(input("введите пользователя которому хотите перевести:\n"))
             if k == 0000:
                  bank[0000]['balance'] = bank[0000]['balance'] + (v)
                  print("переведено " + str(v) + "пользователю " + "0000" + "\n")
@@ -163,7 +168,7 @@ if number == 0000:
         print("2 - пополнить баланс")
         print("3 - снять средства пользователя")
         print("4 - перевод средств между пользователями")
-        print("5 - показатьвсех пользователей в системе и их баланс")
+        print("5 - показать всех пользователей в системе и их баланс")
         print("6 - завершить работу")
 
         c = ("выберите что хотите сделать:\n")
