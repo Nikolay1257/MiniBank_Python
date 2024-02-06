@@ -13,7 +13,7 @@ bank = {
     }
 }
 
-print("Добро пожаловать в банк\n")
+print("Добро пожаловать в наш банк\n")
 
 def check_number(number_string):
      if not number_string.isdigit():
@@ -81,7 +81,7 @@ def shop(USER):
 
 def takeoff(USER):
     if o == 0000:
-         c = int(input("введите сумму для снятия:\n"))
+         c = int(input("введите сумму для :\n"))
          if (c <= (bank[0000]['balance'])) and (c > 0) and (bank[0000]['balance'] > 0):
             bank[0000]['balance'] = bank[0000]['balance'] - int(c)
             print("с вашего счета снято " + str(c) + "$")
@@ -179,15 +179,21 @@ if number == 0000:
             user(o)
 
         elif enter == '2':
-            o = int(input("Выберите пользователя:\n"))
-            result = shop(o)
+            try:
+                 o = int(input("Выберите пользователя:\n"))
+                 result = shop(o)
+            except ValueError:
+                 print("Ошибка, введите числа\n")
 
         elif enter == '3':
-            o = int(input("выберите пользователя:\n"))
-            takeoff(o)
+            try:
+                 o = int(input("выберите пользователя:\n"))
+                 takeoff(o)
+            except ValueError:
+                 print("Ошибка, введите числа\n")
 
         elif enter == '4':
-             o = int(input("введите пользователя у которого хотите пееревести деньги\n"))
+             o = int(input("введите счет отправителя:\n"))
              card(o)
 
         elif enter == '5':
@@ -213,20 +219,26 @@ else:
                print("на вашем счету " + str(bank[number]['balance']) + "$")
 
           elif enter == '2':
-               o = int(input("введите сумму для пополнения:\n"))
-               if (o < 20001) and (o > 0):
-                    bank[number]['balance'] = bank[number]['balance'] + int(o)
-                    print("Ваш счет пополнен на: " + str(o) + "$" + "\n")
-               else:
-                    print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+               try:
+                    o = int(input("введите сумму для пополнения:\n"))
+                    if (o < 20001) and (o > 0):
+                         bank[number]['balance'] = bank[number]['balance'] + int(o)
+                         print("Ваш счет пополнен на: " + str(o) + "$" + "\n")
+                    else:
+                         print("сумма превышает минимально допустимую 20000$\nПросьба обратиться в банк\n")
+               except ValueError:
+                    print("Ошибка, используйте числа\n")
 
           elif enter == '3':
-               c = int(input("введите сумму для снятия:\n"))
-               if (c <= (bank[number]['balance'])) and (c > 0) and (bank[number]['balance'] > 0):
-                    bank[number]['balance'] = bank[number]['balance'] - int(c)
-                    print("с вашего счета снято " + str(c) + "$")
-               else:
-                    print("недостаточно средств\n")
+               try:
+                    c = int(input("введите сумму для снятия:\n"))
+                    if (c <= (bank[number]['balance'])) and (c > 0) and (bank[number]['balance'] > 0):
+                        bank[number]['balance'] = bank[number]['balance'] - int(c)
+                        print("с вашего счета снято " + str(c) + "$")
+                    else:
+                         print("недостаточно средств\n")
+               except ValueError:
+                    print("Ошибка, введите число\n")
 
           elif enter == '4':
                break
