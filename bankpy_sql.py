@@ -4,8 +4,9 @@ con = sqlite3.connect("data.sqlite3")
 cur = con.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS user_data(cart_number integer PRIMARY KEY, pin text, balance REAL)""")
-cur.execute("INSERT INTO user_data(cart_number, pin, balance) VALUES(?, ?, ?)", (12345678, "0000", 10023))
-cur.execute("INSERT INTO user_data(cart_number, pin, balance) VALUES(?, ?, ?)", (87654321, "9993", 0))
+cur.execute("INSERT INTO user_data(cart_number, pin, balance) VALUES(?, ?, ?)", (0000, "0000", 1500))
+cur.execute("INSERT INTO user_data(cart_number, pin, balance) VALUES(?, ?, ?)", (1111, "1111", 20))
+cur.execute("INSERT INTO user_data(cart_number, pin, balance) VALUES(?, ?, ?)", (2222, "2222", 50))
 
 print("Добро пожаловать в банк\n")
 
@@ -112,35 +113,69 @@ def card(user_data: tuple):
         print("\nДанного пользователя нету в бд\n")
 
 
-number = int(number)
+#number = int(number)
 user_data = (number, pin)
 
-while True:
-    print("1 - мой счет")
-    print("2 - пополнить счет")
-    print("3 - снять со счета")
-    print("4 - перевести другому пользователю")
-    print("5 - завершить работу")
+if number == "0000":
+    while True:
+        print("1 - баланс пользователя")
+        print("2 - пополнить счет")
+        print("3 - снять средства пользователя")
+        print("4 - перевести другому пользователю")
+        print("5 - показать всех пользователей в системе и их баланс")
+        print("6 - завершить работу")
 
-    v = "\nВвыберите что хотите сделать: "
-    enter = input(v)
+        c = "\nВвыберите что хотите сделать: "
+        enter = input(c)
 
-    if enter == "1":
-        cur.execute("SELECT * FROM user_data WHERE cart_number = (?)", (user_data[0], ))
-        data_user = cur.fetchall()
-        print(f"\nНа вашем счету  {data_user[0][2]} $")
+        if enter == "1":
+            o = int(input("введите счет:\n"))
 
-    elif enter == "2":
-        shop(user_data)
+            cur.execute("SELECT * FROM user_data WHERE cart_number = (?)", (user_data[0], ))
+            data_user = cur.fetchall()
+            print(f"\nНа вашем счету  {data_user[0][2]} $")
 
-    elif enter == "3":
-        takeoff(user_data)
+        elif enter == "2":
+            shop(user_data)
 
-    elif enter == "4":
-        card(user_data)
+        elif enter == "3":
+            takeoff(user_data)
 
-    elif enter == "5":
-        break
+        elif enter == "4":
+            card(user_data)
 
-    else:
-        print("Извините, но такого пункта нет в меню, выберете другой\n")
+        elif enter == "5":
+            break
+
+        else:
+            print("Извините, но такого пункта нет в меню, выберете другой\n")
+
+else:
+    while True:
+        print("1 - мой счет")
+        print("2 - пополнить счет")
+        print("3 - снять со счета")
+        print("4 - завершить работу")
+
+        c = "\nВвыберите что хотите сделать: "
+        enter = input(c)
+
+        if enter == "1":
+            cur.execute("SELECT * FROM user_data WHERE cart_number = (?)", (user_data[0], ))
+            data_user = cur.fetchall()
+            print(f"\nНа вашем счету  {data_user[0][2]} $")
+
+        elif enter == "2":
+            shop(user_data)
+
+        elif enter == "3":
+            takeoff(user_data)
+
+        elif enter == "4":
+            card(user_data)
+
+        elif enter == "5":
+            break
+
+        else:
+            print("Извините, но такого пункта нет в меню, выберете другой\n")
